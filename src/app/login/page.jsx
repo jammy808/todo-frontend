@@ -3,9 +3,6 @@ import { useState } from 'react';
 import { useRouter } from "next/navigation";
 import api from '../utils/api';
 import Link from "next/link";
-import '@coreui/coreui/dist/css/coreui.min.css'
-import {CNavbar , CContainer , CNavbarBrand , CNavbarToggler, CNavbarNav , CCollapse , CNavItem , CNavLink , CDropdownToggle , CDropdown} from '@coreui/react';
-import Logout from '../logout/page'
 
 function loginPage() {
     const router = useRouter()
@@ -29,29 +26,52 @@ function loginPage() {
     return (
     <div>
 
-        <CNavbar expand="lg" className="bg-indigo-700" colorScheme="dark">
-            <CContainer fluid>
-                <CNavbarBrand href=" " className='text-white text-8xl font-extrabold'>Todo App</CNavbarBrand>
-                <CNavbarToggler onClick={() => setVisible(!visible)} />
-                <CCollapse className="navbar-collapse" visible={visible}>
-                <CNavbarNav>
-                    <CNavItem className='font-bold'>
-                    <CNavLink href="/tasklist" active>
-                        Task List
-                    </CNavLink>
-                    </CNavItem>
+<nav className="bg-indigo-700 p-4">
+        <div className="container mx-auto flex items-center justify-between">
+            <a href="/" className="text-white text-3xl font-extrabold">
+            Todo App
+            </a>
 
-                    <CNavItem className='font-bold'>
-                    <CNavLink href="/dashboard" active>
-                        Dashboard
-                    </CNavLink>
-                    </CNavItem>
+            {/* Mobile Menu Button */}
+            <button
+            className="text-white lg:hidden"
+            onClick={() => setVisible(!visible)}
+            >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="w-6 h-6"
+            >
+                <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+                />
+            </svg>
+            </button>
 
-                </CNavbarNav>
-                
-                </CCollapse>
-            </CContainer>
-        </CNavbar>
+            <div className={`lg:flex space-x-6 ${visible ? 'block' : 'hidden'}`}>
+            <Link href="/tasklist">
+                <p
+                className={`text-white font-bold hover:text-gray-300`}
+                >
+                Task List
+                </p>
+            </Link>
+
+            <Link href="/dashboard">
+                <p
+                className={`text-white font-bold hover:text-gray-300`}
+                >
+                Dashboard
+                </p>
+            </Link>
+            </div>
+        </div>
+        </nav>
 
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
